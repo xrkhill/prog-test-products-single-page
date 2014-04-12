@@ -10,3 +10,20 @@ The application should meet the following criteria:
 - A user should be able to add a product, delete a product, and modify a product.
 - It should be a single page application with no page refreshes
 - Some styling to make it look good
+
+## Tools
+
+- Rails 3
+- SQLite
+- RSpec
+- Sass
+- Foundation
+- JavaScript
+- Backbone
+- Marionette
+
+### Supporting tools
+
+- Guard?
+- Factory Girl?
+- Foreman?
