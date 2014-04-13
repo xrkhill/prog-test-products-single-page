@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  respond_to :json, :html
+  respond_to :html, :json
 
   def index
     @products = Product.all
