@@ -1,20 +1,36 @@
-<h1>Products</h1>
+<nav class="top-bar">
+  <ul class="title-area">
+    <li class="name">
+      <h1><%= link_to 'Products', root_path %></h1>
+    </li>
+  </ul>
+</nav>
 
-<div id="form"></div>
-<div id="list"></div>
+<div class="row">
+  <div id="form" class="small-4 columns"></div>
+  <div id="list" class="small-8 columns"></div>
+</div>
 
-<script id="product-template" type="text/template">
-  <p>Name: <%%= name %></p>
-  <p>Price: $<%%= price %></p>
-  <p>Description: <%%= description %></p>
+<script id="products-grid-template" type="text/template">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</script>
+
+<script id="product-row-template" type="text/template">
+  <td><%%= name %></td>
+  <td><%%= price %></td>
+  <td><%%= description %></td>
 </script>
 
 <script id="no-products-template" type="text/template">
   <h2>No Products</h2>
-</script>
-
-<script id="products-template" type="text/template">
-  <h2>Products</h2>
 </script>
 
 <script id="form-template" type="text/template">

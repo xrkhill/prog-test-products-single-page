@@ -24,16 +24,19 @@ var Products = Backbone.Collection.extend({
   url: '/products'
 });
 
-var ProductView = Backbone.Marionette.ItemView.extend({
-  template: '#product-template'
-});
-
 var NoProductsView = Backbone.Marionette.ItemView.extend({
   template: '#no-products-template'
 });
 
-var ProductsView = Backbone.Marionette.CollectionView.extend({
-  itemView: ProductView,
+var ProductRowView = Backbone.Marionette.ItemView.extend({
+  tagName: 'tr',
+  template: '#product-row-template'
+});
+
+var ProductsGridView = Backbone.Marionette.CompositeView.extend({
+  tagName: 'table',
+  template: '#products-grid-template',
+  itemView: ProductRowView,
   emptyView: NoProductsView
 });
 
@@ -81,7 +84,7 @@ ProductsApp.addInitializer(function() {
   ProductsApp.products = new Products();
 
   ProductsApp.form.show(new FormView({ collection: ProductsApp.products }));
-  ProductsApp.list.show(new ProductsView({ collection: ProductsApp.products }));
+  ProductsApp.list.show(new ProductsGridView({ collection: ProductsApp.products }));
 });
 
 ProductsApp.start();
