@@ -1324,6 +1324,8 @@ $default-float: left;
 // $topbar-sticky-class: ".sticky";
 // $topbar-arrows: true; //Set false to remove the triangle icon from the menu item
 
+@import "foundation";
+/*
 @import
   "foundation/components/grid",
   "foundation/components/block-grid",
@@ -1349,3 +1351,4 @@ $default-float: left;
   "foundation/components/type",
   "foundation/components/offcanvas",
   "foundation/components/visibility";
+*/
