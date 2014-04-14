@@ -33,11 +33,25 @@ var ProductRowView = Backbone.Marionette.ItemView.extend({
   template: '#product-row-template',
   templateHelpers: {
     showPrice: function() {
+      // format number with comma at thousands and two decimals
       return '$' +
         parseFloat(this.price).
         toFixed(2).
         toString().
         replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+  },
+  ui: {
+    'delete': 'button.delete'
+  },
+  events: {
+    'click @ui.delete': 'deleteProduct'
+  },
+  deleteProduct: function() {
+    if (confirm('Are you sure you want to delete the product "' + this.model.attributes.name + '"?')) {
+      this.model.destroy({
+        wait: true
+      });
     }
   }
 });

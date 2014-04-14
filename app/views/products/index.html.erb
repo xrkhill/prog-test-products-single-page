@@ -23,11 +23,13 @@
 </div>
 
 <script id="products-grid-template" type="text/template">
+  <caption class="subheader">All Products</caption>
   <thead>
     <tr>
       <th>Name</th>
       <th>Price</th>
       <th>Description</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -38,6 +40,10 @@
   <td><%%= name %></td>
   <td><%%= showPrice() %></td>
   <td><%%= description %></td>
+  <td class="actions">
+    <button class="edit tiny radius">Edit</button>
+    <button class="delete tiny radius">Delete</button>
+  </td>
 </script>
 
 <script id="no-products-template" type="text/template">
@@ -45,9 +51,9 @@
 </script>
 
 <script id="form-template" type="text/template">
-  <h2>New Product</h2>
+  <h2 class="subheader">New Product</h2>
   <p>Name: <input type="text" id="name" /></p>
   <p>Price: <input type="number" id="price" /></p>
   <p>Description: <textarea id="description"></textarea></p>
-  <p><button>Create</button></p>
+  <p><button class="radius">Create</button></p>
 </script>
