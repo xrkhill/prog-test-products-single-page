@@ -43,6 +43,7 @@
 
 <%= content_for :javascript do -%>
   <%= javascript_tag do %>
+    // Bootstrap products to eliminate HTTP request
     $(function() {
       ProductsApp.products.reset(<%=raw products_array_as_json_helper @products %>);
     });
