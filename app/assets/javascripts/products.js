@@ -46,6 +46,7 @@ var ProductsGridView = Backbone.Marionette.CompositeView.extend({
   tagName: 'table',
   template: '#products-grid-template',
   itemView: ProductRowView,
+  itemViewContainer: 'tbody',
   emptyView: NoProductsView
 });
 
@@ -67,14 +68,13 @@ var FormView = Backbone.Marionette.ItemView.extend({
   },
 
   createNewProduct: function() {
-    this.collection.create(
-      {
+    this.collection.create({
         name: this.ui.name.val(),
         price: this.ui.price.val(),
         description: this.ui.description.val()
-      },
-      { wait: true }
-    );
+      },{
+        wait: true
+      });
   },
 
   clearForm: function() {
