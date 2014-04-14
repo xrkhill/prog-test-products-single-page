@@ -1,3 +1,14 @@
+<%= content_for :title, "Products" -%>
+
+<%= content_for :javascript do -%>
+  <%= javascript_tag do %>
+    // Bootstrap products to eliminate HTTP request
+    $(function() {
+      ProductsApp.products.reset(<%=raw products_array_as_json_helper @products %>);
+    });
+  <% end %>
+<% end -%>
+
 <nav class="top-bar">
   <ul class="title-area">
     <li class="name">
@@ -40,12 +51,3 @@
   <p>Description: <textarea id="description"></textarea></p>
   <p><button>Create</button></p>
 </script>
-
-<%= content_for :javascript do -%>
-  <%= javascript_tag do %>
-    // Bootstrap products to eliminate HTTP request
-    $(function() {
-      ProductsApp.products.reset(<%=raw products_array_as_json_helper @products %>);
-    });
-  <% end %>
-<% end -%>
