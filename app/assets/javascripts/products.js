@@ -137,7 +137,11 @@ var EditView = Backbone.Marionette.ItemView.extend({
         description: this.ui.description.val()
       },{
         wait: true,
+        success: function(model, response, options){
+          ProductsApp.execute('clearErrors');
+        },
         error: function(model, response, options){
+          ProductsApp.execute('clearErrors');
           alert("Sorry, there was a problem saving your changes. Please try again.");
         }
       });
