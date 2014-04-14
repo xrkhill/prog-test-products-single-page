@@ -52,17 +52,17 @@
 
 <script id="form-template" type="text/template">
   <h2 class="subheader">New Product</h2>
-  <p>Name: <input type="text" id="name" /></p>
-  <p>Price: <input type="number" id="price" /></p>
-  <p>Description: <textarea id="description"></textarea></p>
+  <label>Name: <input type="text" id="name" /></label>
+  <label>Price: <input type="number" id="price" /></label>
+  <label>Description: <textarea id="description"></textarea></label>
   <p><button class="radius">Create</button></p>
 </script>
 
 <script id="edit-template" type="text/template">
   <h2 class="subheader">Edit Product</h2>
-  <p>Name: <input type="text" id="name" value="<%%= name %>" /></p>
-  <p>Price: <input type="number" id="price" value="<%%= price %>" /></p>
-  <p>Description: <textarea id="description"><%%= description %></textarea></p>
+  <label>Name: <input type="text" id="name" value="<%%= name %>" /></label>
+  <label>Price: <input type="number" id="price" value="<%%= price %>" /></label>
+  <label>Description: <textarea id="description"><%%= description %></textarea></label>
   <p>
     <button class="radius">Update</button>
     <a id="done">Done</a>
