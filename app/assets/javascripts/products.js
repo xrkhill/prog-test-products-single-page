@@ -2,18 +2,18 @@ var ProductsApp = new Backbone.Marionette.Application();
 
 var Product = Backbone.Model.extend({
   validate: function(attrs, options) {
-    console.log('validate called');
-    console.log(attrs);
-    if (attrs.name === undefined || attrs.name == '')
+    if (_.isEmpty(attrs.name))
       return { field: 'name', message: 'Name cannot be blank' };
-    if (attrs.price === undefined || attrs.price == '' || attrs.price < 0)
+
+    var priceAsFloat = parseFloat(attrs.price);
+    if (_.isEmpty(attrs.price) || _.isNaN(priceAsFloat) || priceAsFloat < 0)
       return { field: 'price', message: 'Price must be a non-negative number' };
   },
 
   initialize: function() {
     this.on('invalid', function(model, error) {
       $('.inline-errors').remove();
-      var errorTag = $('<p>').addClass('inline-errors').text("Error: " + error.message);
+      var errorTag = $('<p>').addClass('inline-errors').text(error.message);
       ProductsApp.form.currentView.ui[error.field].before(errorTag);
     });
   }
@@ -81,6 +81,7 @@ var FormView = Backbone.Marionette.ItemView.extend({
     this.ui.name.val('');
     this.ui.price.val('');
     this.ui.description.val('');
+    $('.inline-errors').remove();
   }
 });
 
