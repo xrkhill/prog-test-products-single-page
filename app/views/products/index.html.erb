@@ -57,3 +57,14 @@
   <p>Description: <textarea id="description"></textarea></p>
   <p><button class="radius">Create</button></p>
 </script>
+
+<script id="edit-template" type="text/template">
+  <h2 class="subheader">Edit Product</h2>
+  <p>Name: <input type="text" id="name" value="<%%= name %>" /></p>
+  <p>Price: <input type="number" id="price" value="<%%= price %>" /></p>
+  <p>Description: <textarea id="description"><%%= description %></textarea></p>
+  <p>
+    <button class="radius">Update</button>
+    <a id="done">Done</a>
+  </p>
+</script>

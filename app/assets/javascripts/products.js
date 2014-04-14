@@ -12,7 +12,7 @@ var Product = Backbone.Model.extend({
 
   initialize: function() {
     this.on('invalid', function(model, error) {
-      $('.inline-errors').remove();
+      ProductsApp.execute('clearErrors');
       var errorTag = $('<p>').addClass('inline-errors').text(error.message);
       ProductsApp.form.currentView.ui[error.field].before(errorTag);
     });
@@ -44,12 +44,20 @@ var ProductRowView = Backbone.Marionette.ItemView.extend({
     }
   },
 
+  modelEvents: {
+    'change': function() {
+      this.render();
+    }
+  },
+
   ui: {
-    'delete': 'button.delete'
+    'delete': 'button.delete',
+    'edit': 'button.edit'
   },
 
   events: {
-    'click @ui.delete': 'deleteProduct'
+    'click @ui.delete': 'deleteProduct',
+    'click @ui.edit': 'editProduct'
   },
 
   deleteProduct: function() {
@@ -61,6 +69,10 @@ var ProductRowView = Backbone.Marionette.ItemView.extend({
         }
       });
     }
+  },
+
+  editProduct: function() {
+    ProductsApp.form.show(new EditView({ model: this.model }));
   }
 });
 
@@ -76,11 +88,13 @@ var FormView = Backbone.Marionette.ItemView.extend({
   template: '#form-template',
 
   events: {
-    'click button': 'createNewProduct',
+    'click button': 'createProduct'
   },
 
   collectionEvents: {
-    'sync': 'clearForm'
+    'sync': function() {
+      ProductsApp.execute('clearForm', this);
+    }
   },
 
   ui: {
@@ -89,7 +103,7 @@ var FormView = Backbone.Marionette.ItemView.extend({
     description: '#description'
   },
 
-  createNewProduct: function() {
+  createProduct: function() {
     this.collection.create({
         name: this.ui.name.val(),
         price: this.ui.price.val(),
@@ -97,14 +111,52 @@ var FormView = Backbone.Marionette.ItemView.extend({
       },{
         wait: true
       });
+  }
+});
+
+var EditView = Backbone.Marionette.ItemView.extend({
+  template: '#edit-template',
+
+  events: {
+    'click button': 'updateProduct',
+    'click #done': 'done'
   },
 
-  clearForm: function() {
-    this.ui.name.val('');
-    this.ui.price.val('');
-    this.ui.description.val('');
-    $('.inline-errors').remove();
+  ui: {
+    name: '#name',
+    price: '#price',
+    description: '#description'
+  },
+
+  updateProduct: function() {
+    var editView = this;
+
+    this.model.save({
+        name: this.ui.name.val(),
+        price: this.ui.price.val(),
+        description: this.ui.description.val()
+      },{
+        wait: true,
+        error: function(model, response, options){
+          alert("Sorry, there was a problem saving your changes. Please try again.");
+        }
+      });
+  },
+
+  done: function() {
+    ProductsApp.form.show(new FormView({ collection: ProductsApp.products }));
   }
+});
+
+ProductsApp.commands.setHandler('clearForm', function(view) {
+  view.ui.name.val('');
+  view.ui.price.val('');
+  view.ui.description.val('');
+  ProductsApp.execute('clearErrors');
+});
+
+ProductsApp.commands.setHandler('clearErrors', function() {
+  $('.inline-errors').remove();
 });
 
 ProductsApp.addRegions({
