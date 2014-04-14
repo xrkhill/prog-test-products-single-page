@@ -30,7 +30,16 @@ var NoProductsView = Backbone.Marionette.ItemView.extend({
 
 var ProductRowView = Backbone.Marionette.ItemView.extend({
   tagName: 'tr',
-  template: '#product-row-template'
+  template: '#product-row-template',
+  templateHelpers: {
+    showPrice: function() {
+      return '$' +
+        parseFloat(this.price).
+        toFixed(2).
+        toString().
+        replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+  }
 });
 
 var ProductsGridView = Backbone.Marionette.CompositeView.extend({
