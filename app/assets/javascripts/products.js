@@ -77,6 +77,7 @@ var ProductRowView = Backbone.Marionette.ItemView.extend({
 });
 
 var ProductsGridView = Backbone.Marionette.CompositeView.extend({
+  id: 'products-grid',
   tagName: 'table',
   template: '#products-grid-template',
   itemView: ProductRowView,

@@ -5,6 +5,7 @@ caption.subheader {
 
 td.actions {
   white-space: nowrap;
+  width: 1%;
 }
 
 #done {
@@ -16,4 +17,8 @@ td.actions {
   background-color: #f2dede;
   border-color: #eed3d7;
   padding: 5px 10px;
+}
+
+#products-grid {
+  width: 100%;
 }
